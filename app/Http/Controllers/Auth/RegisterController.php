@@ -26,12 +26,26 @@ class RegisterController extends Controller
             'admin_secret_key' => 'nullable|string'
         ]);
 
+        // if ($request->role === 'admin') {
+        //     $expectedKey = env('ADMIN_SECRET_KEY');
+        //     if ($request->admin_secret_key !== $expectedKey) {
+        //         return back()->withErrors(['admin_secret_key' => 'Invalid Admin Secret Key.']);
+        //     }
+        // }
         if ($request->role === 'admin') {
-            $expectedKey = env('ADMIN_SECRET_KEY');
-            if ($request->admin_secret_key !== $expectedKey) {
-                return back()->withErrors(['admin_secret_key' => 'Invalid Admin Secret Key.']);
-            }
-        }
+    // Check if an admin already exists
+    $existingAdmin = User::where('role', 'admin')->first();
+    if ($existingAdmin) {
+        return back()->withErrors(['role' => 'An admin already exists. Only one admin is allowed.']);
+    }
+
+    // Validate admin secret key
+    $expectedKey = env('ADMIN_SECRET_KEY');
+    if ($request->admin_secret_key !== $expectedKey) {
+        return back()->withErrors(['admin_secret_key' => 'Invalid Admin Secret Key.']);
+    }
+}
+
 
         $otp = rand(100000, 999999);
         $otpExpiresAt = Carbon::now()->addMinutes(10);

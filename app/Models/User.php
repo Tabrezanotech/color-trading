@@ -30,4 +30,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'otp_expires_at' => 'datetime',
     ];
+
+    // app/Models/User.php
+
+public function isSuperAdmin()
+{
+    return $this->role === 'super_admin';
+}
+
+public function isAdmin()
+{
+    return $this->role === 'admin';
+}
+
 }

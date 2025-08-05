@@ -14,6 +14,7 @@ use App\Http\Controllers\User\Dashboard1Controller;
 use App\Http\Controllers\User\Dashboard5Controller;
 use App\Http\Controllers\User\Dashboard3Controller;
 use App\Http\Controllers\User\Dashboard30Controller;
+use App\Http\Controllers\User\WalletController;
 
 
 
@@ -89,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-     Route::get('/user/dashboard5', [Dashboard5Controller::class, 'index'])->name('user.dashboard5');
+    Route::get('/user/dashboard5', [Dashboard5Controller::class, 'index'])->name('user.dashboard5');
     Route::post('/game5/submit', [Dashboard5Controller::class, 'store'])->name('game5.submit');
 
      Route::get('/current-round5', [Dashboard5Controller::class, 'getCurrentRound']);
@@ -97,13 +98,23 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/check-color-result5', [Dashboard5Controller::class, 'checkColorResult']);
 
 
-
-     Route::get('/user/dashboard30', [Dashboard30Controller::class, 'index'])->name('user.dashboard30');
+    Route::get('/user/landing', [Dashboard30Controller::class, 'landing'])->name('user.landing');
+    Route::get('/user/dashboard30', [Dashboard30Controller::class, 'index'])->name('user.dashboard30');
     Route::post('/game30/submit', [Dashboard30Controller::class, 'store'])->name('game30.submit');
 
      Route::get('/current-round30', [Dashboard30Controller::class, 'getCurrentRound']);
      Route::get('/game/result30/{type}', [Dashboard30Controller::class, 'checkResult']);
      Route::get('/check-color-result30', [Dashboard30Controller::class, 'checkColorResult']);
+    
+    Route::get('/user/wallet', [WalletController::class, 'index'])->name('user.wallet');
+    Route::get('/user/account', [WalletController::class, 'account'])->name('user.account');
+    Route::get('/user/promotion', [WalletController::class, 'promotion'])->name('user.promotion');
+
+    // Route::get('/user/deposit', [WalletController::class, 'showDepositForm'])->name('user.deposit.form');
+    // Route::post('/user/deposit', [WalletController::class, 'deposit'])->name('user.deposit');
+
+    // Route::get('/user/withdraw', [WalletController::class, 'showWithdrawForm'])->name('user.withdraw.form');
+    // Route::post('/user/withdraw', [WalletController::class, 'withdraw'])->name('user.withdraw');
 
 
 });

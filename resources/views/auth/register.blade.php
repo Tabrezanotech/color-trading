@@ -122,6 +122,13 @@
             <input type="text" name="admin_secret_key">
         </div>
 
+          <!-- User Field -->
+            <div id="user-fields">
+                <label>Invitation Code</label>
+                <input type="text" name="invitation_code" id="invitation_code_input"
+                    value="{{ old('invitation_code', $invitationCode ?? '') }}">
+            </div>
+
         <button type="submit">Register</button>
     </form>
 

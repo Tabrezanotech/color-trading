@@ -204,4 +204,10 @@ class Dashboard30Controller extends Controller
             'remaining_time' => $remaining,
         ]);
     }
+
+
+     public function landing()
+    {
+        return view('user.landing_page');
+    }
 }
